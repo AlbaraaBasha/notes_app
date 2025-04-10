@@ -12,7 +12,7 @@ class CostumSearchIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: Colors.white.withValues(alpha: 0.1),
       ),
-      child: Center(child: Icon(Icons.search, size: 24)),
+      child: const Center(child: Icon(Icons.search, size: 24)),
     );
   }
 }
