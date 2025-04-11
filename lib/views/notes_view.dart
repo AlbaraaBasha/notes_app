@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constans.dart';
+import 'package:notes_app/widgets/add_note_sheet.dart';
 import 'package:notes_app/widgets/costum_search_icon.dart';
-import 'package:notes_app/widgets/note_item.dart';
 import 'package:notes_app/widgets/notes_listView.dart';
 
 class NotesView extends StatelessWidget {
@@ -8,8 +9,21 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Padding(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return const AddNoteSheet();
+            },
+          );
+        },
+        shape: const CircleBorder(),
+        backgroundColor: kPrimaryColor,
+        child: const Icon(Icons.add, color: Colors.black),
+      ),
+      body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
@@ -25,7 +39,7 @@ class NotesView extends StatelessWidget {
                 CostumSearchIcon(),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Expanded(child: NotesListView()),
           ],
         ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({required this.noteColor, super.key});
+  final Color noteColor;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: const Color(0xffFFCC80),
+        color: noteColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -20,7 +20,7 @@ class NoteItem extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontSize: 24),
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 16),
+              padding: const EdgeInsets.only(top: 8, bottom: 24),
               child: Text(
                 'Build your career with Albaraa Basha',
                 style: TextStyle(
