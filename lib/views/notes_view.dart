@@ -36,7 +36,7 @@ class NotesView extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Spacer(),
-                CostumSearchIcon(),
+                CostumSearchIcon(icon: Icons.search),
               ],
             ),
             SizedBox(height: 10),
