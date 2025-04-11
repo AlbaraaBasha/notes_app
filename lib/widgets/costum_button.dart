@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/constans.dart';
 
 class CostumButton extends StatelessWidget {
-  const CostumButton({super.key});
-
+  const CostumButton({super.key, this.onPressed});
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: kPrimaryColor,
           shape: RoundedRectangleBorder(
