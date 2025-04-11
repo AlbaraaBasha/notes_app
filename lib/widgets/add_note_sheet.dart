@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:notes_app/cubits/cubit/add_note_cubit.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/constum_text_field.dart';
 import 'package:notes_app/widgets/costum_button.dart';
 
@@ -7,9 +11,31 @@ class AddNoteSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18),
-      child: AddNoteForm(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      child: BlocConsumer<AddNoteCubit, AddNoteState>(
+        listener: (context, state) {
+          if (state is AddNoteFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.error), backgroundColor: Colors.red),
+            );
+          } else if (state is AddNoteSuccess) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Note added successfully!'),
+                backgroundColor: Colors.green,
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return ModalProgressHUD(
+            inAsyncCall: state is AddNoteLoading ? true : false,
+            child: const AddNoteForm(),
+          );
+        },
+      ),
     );
   }
 }
@@ -54,7 +80,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                Navigator.pop(context);
+                BlocProvider.of<AddNoteCubit>(context).addNote(
+                  NoteModel(
+                    title: title!,
+                    subtitle: subtitle!,
+                    date: DateTime.now.toString(),
+                  ),
+                );
               } else {
                 setState(() {
                   autovalidateMode = AutovalidateMode.onUserInteraction;
