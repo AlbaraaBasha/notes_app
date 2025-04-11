@@ -9,10 +9,9 @@ class ModifyNoteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(),
+        padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 16),
         child: Column(
           children: [
-            const SizedBox(height: 60),
             Row(
               children: [
                 const Text(
