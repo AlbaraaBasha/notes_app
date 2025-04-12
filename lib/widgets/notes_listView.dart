@@ -40,8 +40,11 @@ class _NotesListViewState extends State<NotesListView> {
               padding: const EdgeInsets.only(left: 12, bottom: 8, right: 12),
               child: GestureDetector(
                 onTap:
-                    () =>
-                        Navigator.pushNamed(context, const ModifyNoteView().id),
+                    () => Navigator.pushNamed(
+                      context,
+                      const ModifyNoteView().id,
+                      arguments: notes[index],
+                    ),
                 child: NoteItem(
                   noteColor: noteColors[index % 5],
                   note: notes[index],
